@@ -1,4 +1,6 @@
 # Introduction
+NyakaMwizi is a machine learning model built to detect potentially fraudulent transactions
+
 The [dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) used contains 1.3M instances and 23 features
 
 # Visual insights
