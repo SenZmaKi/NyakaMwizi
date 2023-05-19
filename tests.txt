@@ -1,0 +1,65 @@
+
+__ Model selection __
+LogisticRegressor
+
+_ Confusion matrix _
+Predictions non-fraud  fraud
+
+Non fraud   99.95%     0.05%
+
+Fraud       99.97%     0.03%
+
+RandomForestClassifier(n_estimators=5)
+_ Confusion matrix _
+Predictions non-fraud  fraud
+
+Non fraud   99.98%     0.02%
+
+Fraud       22.9%     77.1%
+
+DecisionTreeClassifier *Selected(random_state=69)
+_ Confusion matrix _
+Predictions non-fraud  fraud
+
+Non fraud   99.88%     0.12%
+
+Fraud       17.13%     82.87%
+
+__ Important_features __
+meta features(in order of importance) = "amt", "category", "time", "city_pop", "age", "gender", "month" > 82.33%
+- category & amt & time > & age 80%
+- city_pop > 2 % improvement
+- gender > 2% improvement
+- long & lat & merch_lat & merch_long > 1% improvement
+crappy features
+- amt_interval > useless amt is simply better
+- age_interval > age is simply better
+- merch_long & merch_lat > increases train-test time
+
+__ Dropping important_features to gauge their importance__
+start point(sp) = 82%
+most features heavily depend on amt for the model to even make any correct predictions
+- amt > sp - 49% = 33.12%
+- category > sp - 59% = 22.6%
+- time > sp - 69% = 13.49%
+= age > sp - 74% = 8.41%
+- city_pop sp - 81% = 1.53%
+
+
+__ Feature selection __
+
+Initial train-test time = ~1m 30s
+Final train-test time = ~25s
+
+Initial accuracy = 82.87%
+Final accuracy = 82.46%%
+
+__ Model performance on test set __
+
+Predictions non-fraud  fraud
+
+Non fraud   99.89%     0.11%
+
+Fraud       17.12%     82.88%
+
+WHOOP!! WHOOP!! WHOOP!!
