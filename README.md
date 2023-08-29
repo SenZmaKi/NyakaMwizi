@@ -3,8 +3,25 @@ NyakaMwizi is a machine learning model built to detect potentially fraudulent tr
 
 The [dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) used contains 1.3M instances and 23 features
 
-# Visual insights
-These are insights gained from exploring the data with graphs and computing percentages
+# Table of Contents
+1. [How to test out the model](#how-to-test-the-model-out)
+2. [Visual Insights](#visual-insights)
+3. [Final Model Performance](#final-model-performance)
+
+# How to test the model out
+Ensure you have [Python](https://www.python.org/downloads/) (version 3.11 or newer) and [Git](https://github.com/git-guides/install-git) installed. For Linux users you also have to create a [Python virtual environment](https://docs.python.org/3/library/venv.html), the same is recommended for Mac and Windows, but you don't have to.
+
+Run the following commands
+
+```
+git clone https://github.com/SenZmaKi/NyakaMwizi
+cd NyakaMwizi
+pip install -r requirements.txt
+python test_model.py
+```
+
+# Visual Insights
+These are insights I gained as I was exploring the data-set with graphs and computations
 
 They are in order of hierachy
 
@@ -57,3 +74,8 @@ They are in order of hierachy
 ![image](https://github.com/SenZmaKi/NyakaMwizi/assets/90490506/548952af-74da-44f0-ad4e-8b757d1bf021)
 ### Graph for non frauds
 ![image](https://github.com/SenZmaKi/NyakaMwizi/assets/90490506/94f1c0e4-ea95-4882-adf7-fda46686b0b6)
+
+# Final Model Performance
+- [Model](https://github.com/SenZmaKi/NyakaMwizi/blob/master/model.pkl): DecisionTreeClassifier
+- Precision: 82.88%
+- Recall: 17.12%

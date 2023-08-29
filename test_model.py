@@ -1,10 +1,18 @@
 import joblib
 import pandas as pd
-from sklearn import model_selection
 from sklearn import metrics
 from sklearn import preprocessing
 import datetime
+import sys
+import time
+import opendatasets
+import os
 
+
+def download_test_data_set():
+    if not os.path.exists(os.path.join("fraud-detection", "fraudTest.csv")):
+        slow_print("Downloading test data set")
+        opendatasets.download("https://www.kaggle.com/datasets/kartik2112/fraud-detection?select=fraudTest.csv", force=True)
 
 def select_features(df: pd.DataFrame, features: list[str])->pd.DataFrame:
     copy = df.copy()
@@ -12,9 +20,6 @@ def select_features(df: pd.DataFrame, features: list[str])->pd.DataFrame:
         if feat not in features:
             copy = copy.drop(feat, axis=1)
     return copy
-
-def generate_confusion_matrix(model, x, y, cv: str)->list[list[int]]:
-    return metrics.confusion_matrix(y, model_selection.cross_val_predict(model, x, y, cv=cv))
 
 def display_confusion_matrix(confusion_matrix: list[list[int]], non_fraud, fraud):
     nonfraud_count = len(non_fraud)
@@ -70,9 +75,18 @@ def label_encode(df: pd.DataFrame, cat_features: list[str])->pd.DataFrame:
     return df_copy
 
 
+def slow_print(text, delay_time=0.01): 
+    for character in text:      
+        sys.stdout.write(character) 
+        sys.stdout.flush()
+        time.sleep(delay_time)
+    sys.stdout.write("\n")
 
-model, features, target_class = joblib.load("./model.pkl")
-data_set = pd.read_csv("./fraud-detection/fraudTest.csv")
+slow_print("Loading model")
+model, features, target_class = joblib.load("model.pkl")
+slow_print("Loading data set")
+download_test_data_set()
+data_set = pd.read_csv(os.path.join("fraud-detection", "fraudTest.csv"))
 
 
 y = data_set[target_class]
@@ -82,7 +96,24 @@ fraud = y[y==1]
 
 
 cat_features = ["full_name", "gender", "job", "merch_name", "category", "time_interval", "age_interval", "amt_interval", "city_pop_interval"]
+slow_print("Performing feature selection and extraction")
 x = process_features(x)
+slow_print("Performing label encoding")
 x = label_encode(x, cat_features)
+slow_print("Performing final feature selection")
 x = select_features(x, features)
+
+# instance = 69
+# predictiion = model.predict([x.loc[instance]])
+
+# if predictiion == 1 and predictiion == [y.loc[instance]]:
+#     slow_print(f"Correctly flagged instance {instance} as FRAUD")
+
+# elif predictiion == 0 and predictiion == y[instance]:
+#     slow_print(f"Correctly flagged instance {instance} as NON-FRAUD")
+
+# else:
+#     slow_print("Incorrect classification")
+
+slow_print("Generating confusion matrix\n")
 display_confusion_matrix(metrics.confusion_matrix(y, model.predict(x)), non_fraud, fraud)
