@@ -9,14 +9,23 @@ The [dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) used c
 3. [Final Model Performance](#final-model-performance)
 
 # How to test out the model
-Ensure you have [Python](https://www.python.org/downloads/) (version 3.11 or newer) and [Git](https://github.com/git-guides/install-git) installed. For Linux users you also have to create a [Python virtual environment](https://docs.python.org/3/library/venv.html), the same is recommended for Mac and Windows, but you don't have to.
 
-Run the following commands
+Ensure you have [Python 3.11](https://www.python.org/downloads/release/python-3111) and [Git](https://github.com/git-guides/install-git) installed. 
 
+Open a terminal and run the following commands.
+
+1. **Set everything up.**
+- Linux/Mac
 ```
-git clone https://github.com/SenZmaKi/NyakaMwizi
-cd NyakaMwizi
-pip install -r requirements.txt
+git clone https://github.com/SenZmaKi/NyakaMwizi && cd NyakaMwizi && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+```
+- Windows (Command Prompt)
+```
+git clone https://github.com/SenZmaKi/NyakaMwizi && cd NyakaMwizi && python -m venv .venv && .venv\Scripts\activate && pip install -r requirements.txt
+```
+
+2. **Test the model.**
+```
 python test_model.py
 ```
 
